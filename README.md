@@ -1,6 +1,6 @@
 # Currency Exchange Micro Service - H2
 
-RUNNN com.in28minutes.microservices.currencyconversionservice.CurrencyConversionServiceApplicationH2 as a Java Application.
+RUUUUUUUUNNNN com.in28minutes.microservices.currencyconversionservice.CurrencyConversionServiceApplicationH2 as a Java Application.
 
 ## Resources
 
