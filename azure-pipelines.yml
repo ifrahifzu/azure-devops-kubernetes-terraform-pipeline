@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: azure_local_agent_rz
+  name: Default
 
 steps:
 - script: echo Hello, world!
