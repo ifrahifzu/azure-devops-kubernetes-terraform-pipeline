@@ -10,16 +10,16 @@ pool:
   name: Default
 
 jobs:
-  job: job1
-steps:
+  - job: job1
+  steps:
   - script: echo job 1- Hello, world!
     displayName: 'Run a one-line script'
   - script: |
       echo Add other tasks to build, test, and deploy your project.
       echo See https://aka.ms/yaml
     displayName: 'Run a multi-line script'
-  job: job2
-steps:
+  - job: job2
+  steps:
   - script: echo job22222222222 -Hello, world!
     displayName: 'Run a one-line script'
   - script: |
