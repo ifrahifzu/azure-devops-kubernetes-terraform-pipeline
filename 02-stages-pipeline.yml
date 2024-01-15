@@ -14,7 +14,7 @@ stages:
   jobs:
   - job1: FirstJob
     steps:
-	- bash: echo build firstJob!!
+	  - bash: echo build firstJob!!
   - job2: SecondJob
      steps:
      - bash: echo Build SecondJob!!
