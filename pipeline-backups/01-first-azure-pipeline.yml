@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'azure_local_agent_rz'
 
 # Pipelines > Stages > Jobs > Tasks(Steps)
 
