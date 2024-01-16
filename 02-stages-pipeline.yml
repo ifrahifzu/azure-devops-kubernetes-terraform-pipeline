@@ -23,8 +23,22 @@ stages:
     - bash: echo $(Build.SourceBranchName)
     - bash: echo $(Build.SourceDirectory)
     - bash: echo $(System.DefaultWorkingDirectory)
-    - bash: ls -R $(System.DefaultWorkingDirectory)    
+    - bash: echo ls -R $(System.DefaultWorkingDirectory)    
     - bash: echo $(Build.ArtifactStagingDirectory)
+    - bash: java -version
+    - bash: node --version
+    - bash: python --version
+    - bash: mvn -version
+    - bash: echo ls -R $(System.DefaultWorkingDirectory)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: |
+          **/*.yaml
+          **/*.tf
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - bash: echo ls -R $(System.DefaultWorkingDirectory)  
+    
   # - job: SecondJob
   #   steps:
   #   - bash: echo Build SecondJob
