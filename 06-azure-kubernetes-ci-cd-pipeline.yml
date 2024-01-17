@@ -1,5 +1,5 @@
 trigger:
-- main
+- master
 
 resources:
 - repo: self
@@ -8,49 +8,43 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
+
+# Stage 1
+# Build Docker Image
+# Publish the K8S Files
+
 - stage: Build
   displayName: Build image
-  jobs:
+  jobs:  
   - job: Build
     displayName: Build
     pool:
-      vmImage: ubuntu-latest
+      vmImage: 'ubuntu-latest'
     steps:
-    # - task: Docker@2
-    #   displayName: Build an image
-    #   inputs:
-    #     command: build
-    #     dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-    #     tags: |
-    #       $(tag)
     - task: Docker@2
       inputs:
-        containerRegistry: 'ifrahifzu-docker-hub'
+        containerRegistry: 'in28min-docker-hub'
         repository: 'ifrahifzu/currency-exchange-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
-
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: '**/*.yaml'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'manifests'
         publishLocation: 'Container'
-        MaxArtifactSize: 2048
-
 - stage: Deploy
   displayName: Deploy image
-  jobs:
+  jobs:  
   - job: Deploy
     displayName: Deploy
     pool:
-      vmImage: ubuntu-latest
+      vmImage: 'ubuntu-latest'
     steps:
     - task: DownloadPipelineArtifact@2
       inputs:
@@ -58,14 +52,13 @@ stages:
         artifactName: 'manifests'
         itemPattern: '**/*.yaml'
         targetPath: '$(System.ArtifactsDirectory)'
-
-    - task: KubernetesManifest@1
+    - task: KubernetesManifest@0
       inputs:
         action: 'deploy'
-        connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'azure-kubernetes-connection'
         namespace: 'default'
         manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
         containers: 'ifrahifzu/currency-exchange-devops:$(tag)'
- 
-    
+# Stage 2
+# Download the K8S Files
+# Deploy to K8S Cluster with Docker Image
