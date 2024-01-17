@@ -22,8 +22,8 @@ steps:
     backendServiceArm: 'azure-resource-manager-service-connection'
     ensureBackend: true
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'westeurope'
+    backendAzureRmResourceGroupLocation: 'southindia'
     backendAzureRmStorageAccountName: 'storageacctifrahifzu'
     backendAzureRmContainerName: 'storageacctifrahifzucontainer'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
-    allowTelemetryCollection: true
+    allowTelemetryCollection: false
