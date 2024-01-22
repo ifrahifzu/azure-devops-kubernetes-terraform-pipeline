@@ -41,8 +41,8 @@ module "ifrahifzu-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "ifrahifzu-cluster"
   cluster_version = "1.14"
-  #subnets         = ["subnet-0e4fa751c766d81dd", "subnet-044e81d69f5f6be4a"] #CHANGE
-  subnets = data.aws_subnet_ids.subnets.ids
+  subnet_ids         = ["subnet-0e4fa751c766d81dd", "subnet-044e81d69f5f6be4a"] #CHANGE
+  #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
   #vpc_id         = "vpc-1234556abcdef"
