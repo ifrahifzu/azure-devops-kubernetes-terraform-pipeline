@@ -3,7 +3,7 @@
 # Uses default VPC and Subnet. Create Your Own VPC and Private Subnets for Prod Usage.
 # terraform-backend-state-in28minutes-123
 # AKIA4AHVNOD7OOO6T4KI
-#terraform-backend-state-ifrahifzu-123
+#terraform-backend-state-ifrahifzu-124
 
 #terraform {
 #  required_providers {
@@ -41,7 +41,7 @@ module "ifrahifzu-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "ifrahifzu-cluster"
   cluster_version = "1.14"
-  subnets         = ["subnet-0a13260acbc29d72b", "subnet-08c81d9ba71631ddf"] #CHANGE
+  subnets         = ["subnet-0e4fa751c766d81dd", "subnet-044e81d69f5f6be4a"] #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
