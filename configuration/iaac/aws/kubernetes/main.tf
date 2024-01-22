@@ -5,21 +5,15 @@
 # AKIA4AHVNOD7OOO6T4KI
 #terraform-backend-state-ifrahifzu-123
 
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.0"
-    }
-  }
-}
+#terraform {
+#  required_providers {
+#    aws = {
+#      source  = "hashicorp/aws"
+#      version = "~> 3.0"
+#    }
+#  }
+#}
  
-# Configure the AWS Provider
-provider "aws" {
-  region = "ap-southeast-2"
-  # VERSION IS NOT NEEDED HERE
-}
-
 terraform {
   backend "s3" {
     bucket = "mybucket" # Will be overridden from build
@@ -95,3 +89,9 @@ resource "kubernetes_cluster_role_binding" "example" {
 #provider "aws" {
 #  region  = "us-east-1"
 #}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "ap-southeast-2"
+  # VERSION IS NOT NEEDED HERE
+}
