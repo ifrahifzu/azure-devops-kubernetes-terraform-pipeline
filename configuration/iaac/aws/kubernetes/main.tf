@@ -37,24 +37,31 @@ provider "kubernetes" {
   version                = "~> 2.12"
 }
 
-module "ifrahifzu-cluster" {
-  source          = "terraform-aws-modules/eks/aws"
+module "eks" {
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 19.0"
+
   cluster_name    = "ifrahifzu-cluster"
-  cluster_version = "1.14"
-  subnet_ids         = ["subnet-0e4fa751c766d81dd", "subnet-044e81d69f5f6be4a"] #CHANGE
-  #subnets = data.aws_subnet_ids.subnets.ids
-  vpc_id          = aws_default_vpc.default.id
+  cluster_version = "1.27"
 
-  #vpc_id         = "vpc-1234556abcdef"
+  cluster_endpoint_public_access  = true
 
-#  node_groups = [
-#    {
-#      instance_type = "t2.micro"
-#      max_capacity  = 5
-#      desired_capacity = 3
-#      min_capacity  = 3
-#    }
-#  ]
+  cluster_addons = {
+    coredns = {
+      most_recent = true
+    }
+    kube-proxy = {
+      most_recent = true
+    }
+    vpc-cni = {
+      most_recent = true
+    }
+  }
+
+  vpc_id                   = "vpc-0ec280ba0b1d7b774"
+  subnet_ids               = ["subnet-0e4fa751c766d81dd", "subnet-044e81d69f5f6be4a", "subnet-0cb9bc78d63dacf33"]
+  control_plane_subnet_ids = ["subnet-0d91ae4dff3cd2c15", "subnet-0d4c2d05e07da0eea", "subnet-0327bca0b13325af1"]
+
   # Self Managed Node Group(s)
   self_managed_node_group_defaults = {
     instance_type                          = "t2.micro"
@@ -120,6 +127,9 @@ module "ifrahifzu-cluster" {
       ]
     }
   }
+
+  # aws-auth configmap
+  manage_aws_auth_configmap = false
 
 }
 
