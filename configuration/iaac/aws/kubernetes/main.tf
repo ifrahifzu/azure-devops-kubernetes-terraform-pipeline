@@ -18,7 +18,7 @@ terraform {
   backend "s3" {
     bucket = "mybucket" # Will be overridden from build
     key    = "path/to/my/key" # Will be overridden from build
-    region = "ap-southeast-2"
+    region = "us-east-1"
   }
 }
 
@@ -92,6 +92,6 @@ resource "kubernetes_cluster_role_binding" "example" {
 
 # Configure the AWS Provider
 provider "aws" {
-  region = "ap-southeast-2"
+  region = "us-east-1"
   # VERSION IS NOT NEEDED HERE
 }
