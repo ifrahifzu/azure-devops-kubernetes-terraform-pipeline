@@ -93,8 +93,8 @@ module "eks" {
   manage_aws_auth_configmap = false
 
 # Configure the AWS Provider
-provider "aws" {
-  region = "us-east-1"
+#provider "aws" {
+#  region = "us-east-1"
   # VERSION IS NOT NEEDED HERE
-}
+#}
 
