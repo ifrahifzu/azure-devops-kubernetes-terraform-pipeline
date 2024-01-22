@@ -97,4 +97,9 @@ module "eks" {
 #  region = "us-east-1"
   # VERSION IS NOT NEEDED HERE
 #}
+}
+
+provider "aws" {
+region = "us-east-1"
+}
 
