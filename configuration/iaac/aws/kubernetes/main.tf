@@ -24,7 +24,7 @@ terraform {
   backend "s3" {
     bucket = "mybucket" # Will be overridden from build
     key    = "path/to/my/key" # Will be overridden from build
-    region = "us-east-1"
+    region = "ap-southeast-2"
   }
 }
 
@@ -43,9 +43,9 @@ provider "kubernetes" {
   version                = "~> 2.12"
 }
 
-module "in28minutes-cluster" {
+module "ifrahifzu-cluster" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = "in28minutes-cluster"
+  cluster_name    = "ifrahifzu-cluster"
   cluster_version = "1.14"
   subnets         = ["subnet-0a13260acbc29d72b", "subnet-08c81d9ba71631ddf"] #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
@@ -64,11 +64,11 @@ module "in28minutes-cluster" {
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = module.in28minutes-cluster.cluster_id
+  name = module.ifrahifzu-cluster.cluster_id
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.in28minutes-cluster.cluster_id
+  name = module.ifrahifzu-cluster.cluster_id
 }
 
 
